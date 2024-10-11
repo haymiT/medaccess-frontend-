@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="/static/styles/inventory.css" />
+  <title>Inventory Form</title>
+
+</head>
+
+<body>
+  {% include 'nav.html' %}
+  <div class="container">
+    <h2 class="mt-2 mb-4">Register new inventory Itme </h2>
+    <form id="inventoryForm" action="/show_inventory" method="post" onsubmit="return validateForm();">
+      <label for="inventoryId">Inventory ID:</label>
+      <input type="text" id="inventoryId" name="inventoryId">
+
+      <label for="medicationId">Medication ID:</label>
+      <input type="text" id="medicationId" name="medicationId">
+
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" name="quantity">
+
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location">
+
+      <label for="expiryDate">Expiry Date:</label>
+      <input type="date" id="expiryDate" name="expiryDate"><br>
+
+      <input type="submit" value="submit">
+
+    </form>
+  </div>
+  <p id="warrantyNotification"></p>
+  <div>{% include 'footer.html' %}</div>
+  <script src="/static/scripts/expiry_date.js"></script>
+  <script src="/static/scripts/validate_inventory.js"></script>
+</body>
+
+</html>
