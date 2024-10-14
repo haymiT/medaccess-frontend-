@@ -1,5 +1,4 @@
 'use client'
-// LogoutPage.js
 import React from 'react';
 
 const LogoutPage = () => {

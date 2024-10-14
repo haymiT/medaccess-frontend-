@@ -1,4 +1,3 @@
-// pages/inventory.js
 import React from 'react';
 
 const InventoryManagement = () => {

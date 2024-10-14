@@ -1,11 +1,9 @@
 'use client'
-// LoginForm.js
 import React from 'react';
 import '../../../components/static/styles/login.css'
 
 const LoginForm = () => {
     const validateForm = () => {
-        // Add validation logic here
         return true;
     };
 

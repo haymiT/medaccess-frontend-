@@ -1,5 +1,4 @@
 'use client'
-// pages/add_product.js
 import React, { useState } from 'react';
 
 const AddProduct = () => {
@@ -9,7 +8,6 @@ const AddProduct = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        // Handle product addition logic
         console.log({ productName, category, price });
     };
 

@@ -1,4 +1,3 @@
-// LandingPage.js
 import React from 'react';
 import '../../components/static/styles/landing.css';
 

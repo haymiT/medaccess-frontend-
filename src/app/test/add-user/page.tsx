@@ -1,5 +1,4 @@
 'use client'
-// pages/add_user.js
 import React, { useState } from 'react';
 
 const AddUser = () => {
@@ -9,7 +8,6 @@ const AddUser = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        // Handle user addition logic
         console.log({ userName, email, role });
     };
 
