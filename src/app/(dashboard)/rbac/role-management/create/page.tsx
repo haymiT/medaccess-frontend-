@@ -1,5 +1,5 @@
 // import Form from "@/app/ui/invoices/create-form";
-import CreateRoleModal from "@/app/_components/CreateRole";
+import CreateRoleModal from "@/app/ui/forms/CreateRole";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";
 

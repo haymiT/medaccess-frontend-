@@ -7,15 +7,16 @@ import {
   Button,
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import notification from "./notification";
-import { Backend_URL } from "../lib/constant";
+import notification from "../../_components/notification";
+import { Backend_URL } from "../../lib/constant";
 
-export default function CreateSalesForm() {
+export default function RegisterDrugModal() {
   const [formData, setFormData] = useState({
-    quantity: "",
-    price: "",
-    salesDate: "",
-    inventoryId: "",
+    name: "",
+    Manufacturer: "",
+    Price: "",
+    Quantity: "",
+    ExpiryDate: "",
   });
 
   const router = useRouter();
@@ -31,10 +32,11 @@ export default function CreateSalesForm() {
 
     // Prepare the final payload
     const payload = {
-      quantity: formData.quantity,
-      price: formData.price,
-      salesDate: formData.salesDate,
-      inventoryId: formData.inventoryId,
+      name: formData.name,
+      Manufacturer: formData.Manufacturer,
+      Price: formData.Price,
+      Quantity: formData.Quantity,
+      ExpiryDate: formData.ExpiryDate,
     };
 
     try {
@@ -50,7 +52,7 @@ export default function CreateSalesForm() {
       if (response.status === 201) {
         notification.success(
           "Success",
-          "You have successfully Create Sales"
+          "You have successfully Registered the Drug"
         );
         router.push("/auth/signin");
       } else {
@@ -71,41 +73,49 @@ export default function CreateSalesForm() {
       <Paper mt={10} className="-ml-40" radius="md">
         <TextInput
           required
-          label="Quantity"
-          type="number"
-          placeholder="Enter Quantity"
-          name="quantity"
-          value={formData.quantity}
+          label="Drug Name"
+          placeholder="Enter Drug Name"
+          value={formData.name}
           onChange={handleInputChange}
+          name="name"
+        />
+        <TextInput
+          required
+          label="Manufacturer"
+          placeholder="Enter Manufacturer"
+          value={formData.Manufacturer}
+          onChange={handleInputChange}
+          name="Manufacturer"
         />
         <TextInput
           required
           label="Price"
           type="number"
           placeholder="Enter Price"
-          name="price"
-          value={formData.price}
+          value={formData.Price}
           onChange={handleInputChange}
+          name="Price"
         />
         <TextInput
           required
-          label="Sales Date"
+          type="number"
+          label="Quantity"
+          placeholder="Enter Quantity"
+          value={formData.Quantity}
+          onChange={handleInputChange}
+          name="Quantity"
+        />
+        <TextInput
+          required
+          label="Expiry Date"
           type="date"
-          placeholder="Enter Sales Date"
-          name="salesDate"
-          value={formData.salesDate}
+          placeholder="Enter Expiry Date"
+          value={formData.ExpiryDate}
           onChange={handleInputChange}
-        />
-        <TextInput
-          required
-          label="Inventory ID"
-          placeholder="Enter Inventory ID"
-          name="inventoryId"
-          value={formData.inventoryId}
-          onChange={handleInputChange}
+          name="ExpiryDate"
         />
         <Button fullWidth mt="xl" onClick={handleSubmit}>
-          Submit
+          Register Drug
         </Button>
       </Paper>
     </Container>

@@ -1,4 +1,4 @@
-import RegisterEmployeeForm from "@/app/_components/RegisterEmployee";
+import RegisterEmployeeForm from "@/app/ui/forms/RegisterEmployee";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";
 

@@ -5,18 +5,17 @@ import {
   Paper,
   Container,
   Button,
-  Select,
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import notification from "./notification";
-import { Backend_URL } from "../lib/constant";
+import notification from "../../_components/notification";
+import { Backend_URL } from "../../lib/constant";
 
-export default function RegisterEmployeeForm() {
+export default function CreateSalesForm() {
   const [formData, setFormData] = useState({
-    name: "",
-    contact: "",
-    sex: "",
-    address: ""
+    quantity: "",
+    price: "",
+    salesDate: "",
+    inventoryId: "",
   });
 
   const router = useRouter();
@@ -27,22 +26,15 @@ export default function RegisterEmployeeForm() {
     });
   };
 
-  const handleSexChange = (sex: string | null) => {
-    setFormData({
-      ...formData,
-      sex: sex || "",
-    });
-  };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    
 
     // Prepare the final payload
     const payload = {
-      name: formData.name,
-      contact: formData.contact,
-      sex: formData.sex,
-      address: formData.address
+      quantity: formData.quantity,
+      price: formData.price,
+      salesDate: formData.salesDate,
+      inventoryId: formData.inventoryId,
     };
 
     try {
@@ -58,7 +50,7 @@ export default function RegisterEmployeeForm() {
       if (response.status === 201) {
         notification.success(
           "Success",
-          "You have successfully Registered Employee"
+          "You have successfully Create Sales"
         );
         router.push("/auth/signin");
       } else {
@@ -78,39 +70,39 @@ export default function RegisterEmployeeForm() {
     <Container size={500} my={40}>
       <Paper mt={10} className="-ml-40" radius="md">
         <TextInput
-          label="Name"
-          placeholder="Enter Name"
-          value={formData.name}
-          onChange={handleInputChange}
-          name="name"
           required
+          label="Quantity"
+          type="number"
+          placeholder="Enter Quantity"
+          name="quantity"
+          value={formData.quantity}
+          onChange={handleInputChange}
         />
         <TextInput
-          label="Contact"
-          placeholder="Enter Contact"
-          value={formData.contact}
-          onChange={handleInputChange}
-          name="contact"
           required
-          />
-          
-          <Select
-          label="Role"
-          placeholder="Select a role"
-          data={[
-            { value: "Male", label: "Male" },
-            { value: "Female", label: "Female" },
-          ]}
+          label="Price"
+          type="number"
+          placeholder="Enter Price"
+          name="price"
+          value={formData.price}
           onChange={handleInputChange}
-          required
         />
         <TextInput
-          label="Address"
-          placeholder="Enter Address"
-          value={formData.address}
-          onChange={handleInputChange}
-          name="address"
           required
+          label="Sales Date"
+          type="date"
+          placeholder="Enter Sales Date"
+          name="salesDate"
+          value={formData.salesDate}
+          onChange={handleInputChange}
+        />
+        <TextInput
+          required
+          label="Inventory ID"
+          placeholder="Enter Inventory ID"
+          name="inventoryId"
+          value={formData.inventoryId}
+          onChange={handleInputChange}
         />
         <Button fullWidth mt="xl" onClick={handleSubmit}>
           Submit

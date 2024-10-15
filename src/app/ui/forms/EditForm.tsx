@@ -10,8 +10,8 @@ import {
   Flex,
 } from "@mantine/core";
 import { IconUser, IconMail, IconPhone } from "@tabler/icons-react";
-import notification from "./notification";
-import { Backend_URL } from "../lib/constant";
+import notification from "../../_components/notification";
+import { Backend_URL } from "../../lib/constant";
 
 export default function EditUserForm({ user }: { user: any }) {
   const [formData, setFormData] = useState({

@@ -5,18 +5,18 @@ import {
   Paper,
   Container,
   Button,
+  Select,
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import notification from "./notification";
-import { Backend_URL } from "../lib/constant";
+import notification from "../../_components/notification";
+import { Backend_URL } from "../../lib/constant";
 
-export default function RegisterDrugModal() {
+export default function RegisterEmployeeForm() {
   const [formData, setFormData] = useState({
     name: "",
-    Manufacturer: "",
-    Price: "",
-    Quantity: "",
-    ExpiryDate: "",
+    contact: "",
+    sex: "",
+    address: ""
   });
 
   const router = useRouter();
@@ -27,16 +27,22 @@ export default function RegisterDrugModal() {
     });
   };
 
+  const handleSexChange = (sex: string | null) => {
+    setFormData({
+      ...formData,
+      sex: sex || "",
+    });
+  };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    
 
     // Prepare the final payload
     const payload = {
       name: formData.name,
-      Manufacturer: formData.Manufacturer,
-      Price: formData.Price,
-      Quantity: formData.Quantity,
-      ExpiryDate: formData.ExpiryDate,
+      contact: formData.contact,
+      sex: formData.sex,
+      address: formData.address
     };
 
     try {
@@ -52,7 +58,7 @@ export default function RegisterDrugModal() {
       if (response.status === 201) {
         notification.success(
           "Success",
-          "You have successfully Registered the Drug"
+          "You have successfully Registered Employee"
         );
         router.push("/auth/signin");
       } else {
@@ -72,50 +78,42 @@ export default function RegisterDrugModal() {
     <Container size={500} my={40}>
       <Paper mt={10} className="-ml-40" radius="md">
         <TextInput
-          required
-          label="Drug Name"
-          placeholder="Enter Drug Name"
+          label="Name"
+          placeholder="Enter Name"
           value={formData.name}
           onChange={handleInputChange}
           name="name"
+          required
         />
         <TextInput
-          required
-          label="Manufacturer"
-          placeholder="Enter Manufacturer"
-          value={formData.Manufacturer}
+          label="Contact"
+          placeholder="Enter Contact"
+          value={formData.contact}
           onChange={handleInputChange}
-          name="Manufacturer"
+          name="contact"
+          required
+          />
+          
+          <Select
+          label="Role"
+          placeholder="Select a role"
+          data={[
+            { value: "Male", label: "Male" },
+            { value: "Female", label: "Female" },
+          ]}
+          onChange={handleInputChange}
+          required
         />
         <TextInput
-          required
-          label="Price"
-          type="number"
-          placeholder="Enter Price"
-          value={formData.Price}
+          label="Address"
+          placeholder="Enter Address"
+          value={formData.address}
           onChange={handleInputChange}
-          name="Price"
-        />
-        <TextInput
+          name="address"
           required
-          type="number"
-          label="Quantity"
-          placeholder="Enter Quantity"
-          value={formData.Quantity}
-          onChange={handleInputChange}
-          name="Quantity"
-        />
-        <TextInput
-          required
-          label="Expiry Date"
-          type="date"
-          placeholder="Enter Expiry Date"
-          value={formData.ExpiryDate}
-          onChange={handleInputChange}
-          name="ExpiryDate"
         />
         <Button fullWidth mt="xl" onClick={handleSubmit}>
-          Register Drug
+          Submit
         </Button>
       </Paper>
     </Container>

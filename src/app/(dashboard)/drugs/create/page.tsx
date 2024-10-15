@@ -1,4 +1,4 @@
-import RegisterDrugModal from "@/app/_components/RegisterDrug";
+import RegisterDrugModal from "@/app/ui/forms/RegisterDrug";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";
 

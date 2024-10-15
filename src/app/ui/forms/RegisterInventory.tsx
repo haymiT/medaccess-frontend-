@@ -7,8 +7,8 @@ import {
   Button,
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import notification from "./notification";
-import { Backend_URL } from "../lib/constant";
+import notification from "../../_components/notification";
+import { Backend_URL } from "../../lib/constant";
 
 export default function RegisterInventoryForm() {
   const [formData, setFormData] = useState({
