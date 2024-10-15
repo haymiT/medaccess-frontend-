@@ -2,16 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import { Avatar, Box, Flex, Text, Title } from "@mantine/core";
-import Sidebar from "../_components/sidebar/sidebar";
-import { useMediaQuery } from "@mantine/hooks";
-import styles from "../_components/sidebar/sidebar.module.scss";
 import Image from "next/image";
-import CardWrapper from "../ui/dashboard/cards";
+import CardWrapper from "../../ui/dashboard/cards";
 import { IconUser } from "@tabler/icons-react";
-import { Backend_URL } from "../lib/constant";
+import { Backend_URL } from "../../lib/constant";
 
 export default function DashboardPage() {
-  const isMobile = useMediaQuery("(max-width: 768px)");
   const [message, setMessage] = useState("");
   const [auth, setAuth] = useState(false);
   useEffect(() => {
@@ -31,15 +27,6 @@ export default function DashboardPage() {
     })();
   });
   return (
-    <Flex>
-      <nav
-        className={styles.nav}
-        style={{
-          display: isMobile ? "none" : "block",
-        }}
-      >
-        <Sidebar />
-      </nav>
       <Box className="w-full flex p-6  bg-[#e7f4f7]">
         <Box className=" w-full p-6 bg-white">
           <Flex direction={"column"} className="py-2 mb-4 border-b-2">
@@ -67,6 +54,5 @@ export default function DashboardPage() {
           />
         </Box>
       </Box>
-    </Flex>
   );
 }

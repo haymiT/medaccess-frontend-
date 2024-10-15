@@ -15,19 +15,16 @@ import {
 import { closeModal, openModal, modals } from "@mantine/modals";
 import { IconEdit, IconEye, IconPlus, IconTrash } from "@tabler/icons-react";
 import { DataTable } from "mantine-datatable";
-import Sidebar from "../_components/sidebar/sidebar";
 import { useMediaQuery } from "@mantine/hooks";
-import styles from "../_components/sidebar/sidebar.module.scss";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { lusitana } from "../ui/fonts";
+import { lusitana } from "../../ui/fonts";
 import { useRouter } from "next/navigation";
-import { User } from "../lib/user";
-import notification from "../_components/notification";
-import { Backend_URL } from "../lib/constant";
+import { User } from "../../lib/user";
+import notification from "../../_components/notification";
+import { Backend_URL } from "../../lib/constant";
 
 export default function UserListTable() {
-  const isMobile = useMediaQuery("(max-width: 768px)");
   const [users, setUsers] = useState([]);
   const router = useRouter();
 
@@ -127,15 +124,6 @@ export default function UserListTable() {
   };
 
   return (
-    <Flex>
-      <nav
-        className={styles.nav}
-        style={{
-          display: isMobile ? "none" : "block",
-        }}
-      >
-        <Sidebar />
-      </nav>
       <Box className="w-full flex p-6 bg-[#f5f7fa]">
         <Box className="w-full p-6 bg-white rounded-lg shadow-md">
           <Flex
@@ -147,7 +135,7 @@ export default function UserListTable() {
             </h1>
 
             <Link
-              href="/role-management/create"
+              href="/rbac/role-management/create"
               className="flex h-10 items-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             >
               <span className="hidden md:block">Create Role</span>{" "}
@@ -216,6 +204,5 @@ export default function UserListTable() {
           />
         </Box>
       </Box>
-    </Flex>
   );
 }
