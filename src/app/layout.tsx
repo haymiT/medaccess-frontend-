@@ -14,9 +14,9 @@ import "@mantine/notifications/styles.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "RBAC",
+  title: "MedAccess",
   description:
-    "Role-based access control (RBAC) is a method of restricting network access based on the roles of individual users within an enterprise.",
+    "MedAccess is a platform that connects patients with doctors and pharmacies.",
 };
 
 export default function RootLayout({
