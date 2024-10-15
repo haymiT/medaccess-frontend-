@@ -27,7 +27,7 @@ export default function DashboardLayout({ children }: Props) {
 
   return (
     <AppShell
-      header={{ height: 65 }}
+      header={{ height: 60 }}
       navbar={{ width: 280, breakpoint: "sm", collapsed: { mobile: !opened } }}
       padding="5px"
       transitionDuration={500}
