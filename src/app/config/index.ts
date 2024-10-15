@@ -1,27 +1,24 @@
 import {
+	IconBuildingStore,
+	IconBuildingWarehouse,
 	IconDashboard,
-	IconReceipt,
+	IconPillFilled,
 	IconShield,
-	IconTrash,
-	IconTrashFilled,
+	IconShoppingBagCheck,
 	IconTrashX,
-	IconUser,
+	IconUserPlus,
 	IconUsersGroup,
-	IconUserShield,
 } from "@tabler/icons-react";
 import type { NavItem } from "../types/nav-item";
-import { Abel } from "next/font/google";
 
 export const navLinks: NavItem[] = [
 	{ label: "Dashboard", icon: IconDashboard, link: "/dashboard" },
-	{ label: "Register Drug", icon: IconReceipt, link: "/register-drug" },
-	{ label: "Show Drugs", icon: IconReceipt, link: "/show-drugs" },
-	{ label: "Sell Drug", icon: IconReceipt, link: "/show-drugs" },
-	{ label: "Show Sold Drug", icon: IconReceipt, link: "/show-drugs" },
-	{ label: "Register Employee", icon: IconReceipt, link: "/show-drugs" },
-	{ label: "Show Employee", icon: IconReceipt, link: "/show-drugs" },
-	{ label: "Inventory", icon: IconReceipt, link: "/show-drugs" },
-	{ label: "Show Inventory", icon: IconReceipt, link: "/show-drugs" },
+	// Drug Dashboard
+	{ label: "Drugs", icon: IconPillFilled, link: "/drugs" },
+	{ label: "Sell Drug", icon: IconBuildingStore, link: "/sell-drug" },
+	{ label: "Show Sold Drug", icon: IconShoppingBagCheck, link: "/show-sold-drug" },
+	{ label: "Inventory", icon: IconBuildingWarehouse, link: "/inventory" },
+	{ label: "Register Employee", icon: IconUserPlus, link: "/register-employee" },
 	// Role Dashboard	
 	{ label: "Role Dashboard", icon: IconShield, link: "/rbac/dashboard" },
 	{ label: "Register User", icon: IconUsersGroup, link: "/rbac/role-management" },

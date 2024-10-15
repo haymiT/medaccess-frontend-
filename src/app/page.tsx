@@ -1,6 +1,6 @@
 "use client";
 
-import DashboardPage from "./rbac/dashboard/dashboard";
+import DashboardPage from "./(dashboard)/rbac/dashboard/dashboard";
 export default function Home() {
   return (
     <>
