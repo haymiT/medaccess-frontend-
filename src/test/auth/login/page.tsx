@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import '../../../components/static/styles/login.css'
+import '../../../../components/static/styles/login.css'
 
 const LoginForm = () => {
     const validateForm = () => {

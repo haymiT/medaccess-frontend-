@@ -1,7 +1,7 @@
 'use client'
 // SalesReceipt.js
 import React from 'react';
-import '../../components/static/styles/table.css';
+import '../../../components/static/styles/table.css';
 
 const SalesReceipt = ({ sale_id, inventory_id, quantity, price, sales_date, total_price }: any) => {
     const printTable = () => {
