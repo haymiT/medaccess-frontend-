@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  medaccess-front:
+    build:
+      context: .
+      target: runner
+      dockerfile: Dockerfile
+    container_name: medaccess-front
+    ports:
+      - "6445:6445"
+    env_file:
+      - .env
