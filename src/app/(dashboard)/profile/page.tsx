@@ -18,12 +18,12 @@ export default function UserListTable() {
           className="justify-between py-2 mb-4 border-b-2 border-gray-200"
         >
           <h1 className={`${lusitana.className} text-2xl text-gray-800`}>
-            Dashboard
+            Profile
           </h1>
         </Flex>
         <Space h="xl" />
         <Space h="xl" />
-        <Text size="xl">Nothing For Now ! 👷🏗️</Text>
+        <Text size="xl">This is fake user address :) 👷🏗️</Text>
         <Space h="xl" />
         <Space h="xl" />
 

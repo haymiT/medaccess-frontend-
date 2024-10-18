@@ -27,7 +27,7 @@ export default function DashboardPage() {
     })();
   });
   return (
-      <Box className="w-full flex p-6  bg-[#e7f4f7]">
+      <Box className="w-full flex p-6  ">
         <Box className=" w-full p-6 bg-white">
           <Flex direction={"column"} className="py-2 mb-4 border-b-2">
             <Text fw={700} fz="xl" c={"#121A3E"}>
