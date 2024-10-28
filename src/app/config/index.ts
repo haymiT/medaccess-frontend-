@@ -6,6 +6,7 @@ import {
 	IconShield,
 	IconShoppingBagCheck,
 	IconTrashX,
+	IconUser,
 	IconUserPlus,
 	IconUsersGroup,
 } from "@tabler/icons-react";
@@ -23,30 +24,5 @@ export const navLinks: NavItem[] = [
 	{ label: "Role Dashboard", icon: IconShield, link: "/rbac/dashboard" },
 	{ label: "Register User", icon: IconUsersGroup, link: "/rbac/role-management" },
 	{ label: "Archived Users", icon: IconTrashX, link: "/rbac/archived-users" },
-	// {
-	// 	label: "Users & Roles",
-	// 	icon: IconUsersGroup,
-	// 	links: [
-	// 		{
-	// 			label: "Register User",
-	// 			link: "/register-user",
-	// 		},
-	// 		{
-	// 			label: "Show Users",
-	// 			link: "/show-users",
-	// 		},
-	// 		{
-	// 			label: "Register User Role",
-	// 			link: "/register-role",
-	// 		},
-	// 		{
-	// 			label: "Show Roles",
-	// 			link: "/show-roles",
-	// 		},
-	// 		{
-	// 			label: "Archived Users",
-	// 			link: "/assign-role",
-	// 		}
-	// 	],
-	// },
+	{ label: "Profile", icon: IconUser, link: "/profile" },
 ];
