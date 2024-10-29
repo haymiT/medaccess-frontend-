@@ -71,20 +71,19 @@ export default function CreateSalesForm() {
       <Paper mt={10} className="-ml-40" radius="md">
         <TextInput
           required
+          label="Inventory ID"
+          placeholder="Enter Inventory ID"
+          name="inventoryId"
+          value={formData.inventoryId}
+          onChange={handleInputChange}
+        />
+        <TextInput
+          required
           label="Quantity"
           type="number"
           placeholder="Enter Quantity"
           name="quantity"
           value={formData.quantity}
-          onChange={handleInputChange}
-        />
-        <TextInput
-          required
-          label="Price"
-          type="number"
-          placeholder="Enter Price"
-          name="price"
-          value={formData.price}
           onChange={handleInputChange}
         />
         <TextInput
@@ -96,14 +95,7 @@ export default function CreateSalesForm() {
           value={formData.salesDate}
           onChange={handleInputChange}
         />
-        <TextInput
-          required
-          label="Inventory ID"
-          placeholder="Enter Inventory ID"
-          name="inventoryId"
-          value={formData.inventoryId}
-          onChange={handleInputChange}
-        />
+
         <Button fullWidth mt="xl" onClick={handleSubmit}>
           Submit
         </Button>
