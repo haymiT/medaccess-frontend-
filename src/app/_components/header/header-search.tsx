@@ -1,7 +1,7 @@
 import { Group, Button, Divider, Box, Burger, Drawer, ScrollArea, rem } from '@mantine/core';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';  // Importing Next.js router
-import { Logo } from '../logo/Logo';
+import { useRouter } from 'next/navigation'; 
+import { Logo } from '../logo/logo';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './header-search.module.css';
 
@@ -9,11 +9,11 @@ const Links = ({ active, setActive }: any) => {
     const router = useRouter();
     const links = [
         { href: '/dashboard', label: 'Dashboard' },
-        { href: '/drugs', label: 'Drugs' },
+        { href: '/medications', label: 'Medications' },
         { href: '/sell-drug', label: 'Sell Drug' },
         { href: '/show-sold-drug', label: 'Show Sold Drug' },
         { href: '/inventory', label: 'Inventory' },
-        { href: '/role-management', label: 'User Management' },
+        { href: '/rbac/role-management', label: 'User Management' },
         { href: '/archived-users', label: 'Archived Users' },
     ];
 

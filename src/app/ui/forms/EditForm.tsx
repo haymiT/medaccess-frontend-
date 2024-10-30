@@ -78,8 +78,8 @@ export default function EditUserForm({ user }: { user: any }) {
   };
 
   return (
-    <Container size={500} my={40}>
-      <Paper mt={10} className="-ml-40" radius="md">
+    <Container my={40}>
+      <Paper mt={10} shadow="md" p='lg' radius="md">
         <TextInput
           label="Name"
           placeholder="User's name"
