@@ -8,9 +8,9 @@ export default async function Page() {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: "Role Management", href: "/rbac/role-management" },
+          { label: "User Management", href: "/user/user-management" },
           {
-            label: "Create Role",
+            label: "Create User",
             href: "/role-management/create",
             active: true,
           },

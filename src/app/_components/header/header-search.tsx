@@ -13,8 +13,8 @@ const Links = ({ active, setActive }: any) => {
         { href: '/sell-drug', label: 'Sell Drug' },
         { href: '/show-sold-drug', label: 'Show Sold Drug' },
         { href: '/inventory', label: 'Inventory' },
-        { href: '/rbac/role-management', label: 'User Management' },
-        { href: '/archived-users', label: 'Archived Users' },
+        { href: '/user/user-management', label: 'User Management' },
+        { href: '/user/archived-users', label: 'Archived Users' },
     ];
 
     const handleLinkClick = (event: any, link: string) => {

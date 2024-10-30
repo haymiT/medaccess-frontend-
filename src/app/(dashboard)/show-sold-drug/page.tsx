@@ -146,6 +146,12 @@ export default function UserListTable() {
             height={400}
             withColumnBorders
             columns={[
+              // id = db.Column(db.Integer, primary_key=True)
+              // sell_id = db.Column(db.Integer, db.ForeignKey('sells.id'), nullable=False)  # Foreign key to Sell
+              // inventory_id = db.Column(db.Integer, db.ForeignKey('inventory.inventory_id'), nullable=False)  # Foreign key to Inventory
+              // quantity = db.Column(db.Integer, nullable=False)  # Quantity sold
+              // unit_price = db.Column(db.Numeric(10, 2), nullable=False)  # Unit price at sale time
+              // subtotal = db.Column(db.Numeric(10, 2), nullable=False)  # Subtotal for this item (quantity * unit_price)
               { accessor: "saleId", title: "Sale Id", textAlign: "left" },
               { accessor: "inventoryId", title: "Inventory Id", textAlign: "left" },
               { accessor: "quantitySold", title: "Quantity Sold", textAlign: "left" },

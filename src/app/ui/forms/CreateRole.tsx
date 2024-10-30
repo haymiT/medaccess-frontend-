@@ -146,15 +146,16 @@ export default function CreateRoleModal() {
           placeholder="Select a role"
           data={[
             { value: "SuperAdmin", label: "SuperAdmin" },
-            { value: "Admin", label: "Admin" },
             { value: "User", label: "User" },
+            { value: "Supplier", label: "Supplier" },
+            { value: "Admin", label: "Admin" },
           ]}
           onChange={handleRoleChange}
           required
         />
 
         <Button fullWidth mt="xl" onClick={handleSubmit}>
-          Create Role
+          Create User
         </Button>
       </Paper>
     </Container>

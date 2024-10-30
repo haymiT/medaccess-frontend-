@@ -132,11 +132,11 @@ export default function UserListTable() {
           className="justify-between py-2 mb-4 border-b-2 border-gray-200"
         >
           <h1 className={`${lusitana.className} text-2xl text-gray-800`}>
-            Role Management
+            User Management
           </h1>
 
           <Link
-            href="/rbac/role-management/create"
+            href="/user/user-management/create"
             className="flex h-10 items-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
           >
             <span className="hidden md:block">Create Role</span>{" "}
