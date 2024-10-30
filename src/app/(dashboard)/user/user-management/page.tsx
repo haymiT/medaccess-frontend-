@@ -46,14 +46,14 @@ export default function UserListTable() {
   console.log(` Checking the url: ${Backend_URL}/users`);
   const handleDelete = async (userId: number) => {
     try {
-      const response = await fetch(`${Backend_URL}/users/${userId}`, {
-        method: "DELETE",
+      const response = await fetch(`http://localhost:5000/users/${userId}/delete`, {
+        method: "POST",
         credentials: "include",
       });
 
       if (response.ok) {
         setUsers((prevUsers) =>
-          prevUsers.filter((user: User) => user?.id !== userId)
+          prevUsers.filter((user: User) => user?.userId !== userId)
         );
         closeModal("delete");
         notification.success(
@@ -85,13 +85,13 @@ export default function UserListTable() {
         title: `Are you sure you want to delete "${user.name}?"`,
         children: (
           <Text size="sm">
-            This action is irreversible. The user with ID {user.id} will be
+            This action is irreversible. The user with ID {user.userId} will be
             permanently deleted.
           </Text>
         ),
         labels: { confirm: "Delete", cancel: "Cancel" },
         confirmProps: { color: "red" },
-        onConfirm: () => handleDelete(user.id),
+        onConfirm: () => handleDelete(user.userId),
       });
     } else {
       openModal({
@@ -106,14 +106,14 @@ export default function UserListTable() {
           <Stack>
             <Text>
               {action === "view"
-                ? "Here’s where you could show more information..."
+                ? "User Information"
                 : action === "edit"
                   ? "Here’s where you could put an edit form..."
                   : "Here’s where you could ask for confirmation before deleting..."}
             </Text>
             <Grid gutter="xs">
               <GridCol span={2}>ID</GridCol>
-              <GridCol span={10}>{user.id}</GridCol>
+              <GridCol span={10}>{user.userId}</GridCol>
               <GridCol span={2}>Name</GridCol>
               <GridCol span={10}>{user.name}</GridCol>
             </Grid>
@@ -139,7 +139,7 @@ export default function UserListTable() {
             href="/user/user-management/create"
             className="flex h-10 items-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
           >
-            <span className="hidden md:block">Create Role</span>{" "}
+            <span className="hidden md:block">Create User</span>{" "}
             <IconPlus className="h-5 md:ml-4" />
           </Link>
         </Flex>
@@ -155,13 +155,13 @@ export default function UserListTable() {
               title: "Phone Number",
               textAlign: "left",
             },
-            { accessor: "role", title: "Role", textAlign: "left" },
+            { accessor: "role", title: "Role", textAlign: "left", render: (user: User) => user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase(), },
             {
               accessor: "actions",
               title: <Box mr={6}>Actions</Box>,
               width: "0%",
               textAlign: "right",
-              render: (user: any) => (
+              render: (user: User) => (
                 <Group gap={4} wrap="nowrap">
                   <Tooltip label="View" position="top" withArrow>
                     <ActionIcon
@@ -179,7 +179,7 @@ export default function UserListTable() {
                       variant="subtle"
                       color="blue"
                       onClick={() =>
-                        router.push(`/role-management/${user.id}/edit`)
+                        router.push(`/user/user-management/${user.userId}/edit`)
                       }
                     >
                       <IconEdit size={16} />

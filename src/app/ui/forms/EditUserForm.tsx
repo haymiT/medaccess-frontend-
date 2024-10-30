@@ -12,18 +12,19 @@ import {
 import { IconUser, IconMail, IconPhone } from "@tabler/icons-react";
 import notification from "../../_components/notification";
 import { Backend_URL } from "../../lib/constant";
+import { User } from "@/app/lib/user";
 
-export default function EditUserForm({ user }: { user: any }) {
+export default function EditUserForm({ user }: { user: User }) {
   const [formData, setFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
-    phoneNumber: user?.phoneNumber || "",
+    phone_number: user?.phone_number || "",
     role: user?.role || "",
-    address: {
-      city: user?.address?.city || "",
-      street: user?.address?.street || "",
-      country: user?.address?.country || "",
-    },
+    // address: {
+    //   city: user?.address?.city || "",
+    //   street: user?.address?.street || "",
+    //   country: user?.address?.country || "",
+    // },
   });
 
   console.log("Form Data", formData);
@@ -33,29 +34,18 @@ export default function EditUserForm({ user }: { user: any }) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    // Update nested address object
-    if (name === "city" || name === "street" || name === "country") {
-      setFormData((prevState) => ({
-        ...prevState,
-        address: {
-          ...prevState.address,
-          [name]: value,
-        },
-      }));
-    } else {
-      setFormData((prevState) => ({ ...prevState, [name]: value }));
-    }
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSelectChange = (value: string | null) => {
-    setFormData((prevState) => ({ ...prevState, role: value }));
+    setFormData((prevState: any) => ({ ...prevState, role: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${Backend_URL}/users/${user.id}`, {
-        method: "PUT",
+      const response = await fetch(`http://localhost:5000/users/${user.userId}/edit`, {
+        method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -70,7 +60,7 @@ export default function EditUserForm({ user }: { user: any }) {
         notification.error("Error", errorMessage);
       } else {
         notification.success("Success", "User updated successfully");
-        router.push("/role-management");
+        router.push("/user/user-management");
       }
     } catch (error) {
       console.error("Error updating user:", error);
@@ -102,12 +92,26 @@ export default function EditUserForm({ user }: { user: any }) {
           label="Phone Number"
           placeholder="User's phone number"
           leftSection={<IconPhone size={16} />}
-          name="phoneNumber"
-          value={formData.phoneNumber}
+          name="phone_number"
+          value={formData.phone_number}
           onChange={handleChange}
           required
         />
-        <TextInput
+
+        <Select
+          label="Role"
+          placeholder="Select a role"
+          // data={['customer', 'pharmacy', 'supplier']}
+          data={[
+            { value: "customer", label: "Customer" },
+            { value: "pharmacy", label: "Pharmacy" },
+            { value: "supplier", label: "Supplier" },
+          ]}
+          value={formData.role}
+          onChange={handleSelectChange}
+          required
+        />
+        {/* <TextInput
           label="City"
           placeholder="City"
           name="city"
@@ -130,16 +134,7 @@ export default function EditUserForm({ user }: { user: any }) {
           value={formData?.address?.country}
           onChange={handleChange}
           required
-        />
-
-        <Select
-          label="Role"
-          placeholder="Select a role"
-          data={["SuperAdmin", "Admin", "User"]}
-          value={formData.role}
-          onChange={handleSelectChange}
-          required
-        />
+        /> */}
 
         <Flex direction={"row"} gap={5}>
           <Button type="submit" color="blue" mt={10} onClick={handleSubmit}>
@@ -152,7 +147,7 @@ export default function EditUserForm({ user }: { user: any }) {
             variant="outline"
             mt={10}
             component="a"
-            href="/role-management"
+            href="/user/user-management"
           >
             Cancel
           </Button>

@@ -1,12 +1,12 @@
 // 'use client'
-import EditUserForm from "@/app/ui/forms/EditForm";
+import EditUserForm from "@/app/ui/forms/EditUserForm";
 import { fetchUserById } from "@/app/lib/data";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";
 import { notFound } from "next/navigation";
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const id = params.id;
+export default async function Page({ params }: { params: { userId: number } }) {
+  const id = params.userId;
   const user = await fetchUserById(id);
   if (!user) {
     notFound();

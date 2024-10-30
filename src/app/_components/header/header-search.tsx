@@ -14,7 +14,6 @@ const Links = ({ active, setActive }: any) => {
         { href: '/show-sold-drug', label: 'Show Sold Drug' },
         { href: '/inventory', label: 'Inventory' },
         { href: '/user/user-management', label: 'User Management' },
-        { href: '/user/archived-users', label: 'Archived Users' },
     ];
 
     const handleLinkClick = (event: any, link: string) => {
@@ -46,7 +45,7 @@ export function HeaderMegaMenu() {
     return (
         <Box>
             <header className={classes.header}>
-                <Group justify="space-between" h="100%" p={'md'} align="center">
+                <Group justify="space-between" gap={'20px'} h="100%" p={'lg'} my={'sm'} align="center">
                     <Logo />
 
                     <Group h="100%" gap={0} visibleFrom="sm">

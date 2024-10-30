@@ -1,5 +1,4 @@
-// import Form from "@/app/ui/invoices/create-form";
-import CreateRoleModal from "@/app/ui/forms/CreateRole";
+import CreateUserModal from "@/app/ui/forms/CreateUser";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";
 
@@ -18,7 +17,7 @@ export default async function Page() {
       />
         <Divider className="-mt-2" />
 
-      <CreateRoleModal />
+      <CreateUserModal />
     </main>
   );
 }

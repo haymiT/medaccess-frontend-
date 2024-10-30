@@ -10,18 +10,14 @@ import {
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import notification from "../../_components/notification";
-import { Backend_URL } from "../../lib/constant";
 
-export default function CreateRoleModal() {
+export default function CreateUserModal() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     role: "",
     password: "",
-    phoneNumber: "",
-    street: "",
-    city: "",
-    country: "",
+    phone_number: ""
   });
 
   const router = useRouter();
@@ -42,25 +38,17 @@ export default function CreateRoleModal() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    // Construct the address object
-    const address = {
-      street: formData.street,
-      city: formData.city,
-      country: formData.country,
-    };
-
     // Prepare the final payload
     const payload = {
       name: formData.name,
       email: formData.email,
       password: formData.password,
-      phoneNumber: formData.phoneNumber,
-      role: formData.role,
-      address,
+      phone_number: formData.phone_number,
+      role: formData.role
     };
 
     try {
-      const response = await fetch(`${Backend_URL}/users/create-admin`, {
+      const response = await fetch(`http://localhost:5000/users/new`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +62,7 @@ export default function CreateRoleModal() {
           "Success",
           "You have successfully created an admin role"
         );
-        router.push("/auth/signin");
+        router.push("/user/user-management");
       } else {
         const errorData = await response.json();
         const errorMessage = Array.isArray(errorData.message)
@@ -116,28 +104,7 @@ export default function CreateRoleModal() {
         <TextInput
           label="Phone Number"
           placeholder="1234567890"
-          name="phoneNumber"
-          onChange={handleInputChange}
-          required
-        />
-        <TextInput
-          label="City"
-          placeholder="New York"
-          name="city"
-          onChange={handleInputChange}
-          required
-        />
-        <TextInput
-          label="Street"
-          placeholder="Wall Street"
-          name="street"
-          onChange={handleInputChange}
-          required
-        />
-        <TextInput
-          label="Country"
-          placeholder="USA"
-          name="country"
+          name="phone_number"
           onChange={handleInputChange}
           required
         />
@@ -145,10 +112,9 @@ export default function CreateRoleModal() {
           label="Role"
           placeholder="Select a role"
           data={[
-            { value: "SuperAdmin", label: "SuperAdmin" },
-            { value: "User", label: "User" },
-            { value: "Supplier", label: "Supplier" },
-            { value: "Admin", label: "Admin" },
+            { value: "customer", label: "Customer" },
+            { value: "pharmacy", label: "Pharmacy" },
+            { value: "supplier", label: "Supplier" },
           ]}
           onChange={handleRoleChange}
           required

@@ -1,8 +1,8 @@
 import { Backend_URL } from "./constant";
 
-export async function fetchUserById(id: string) {
+export async function fetchUserById(userId: number) {
   try {
-    const response = await fetch(`${Backend_URL}/users/${id}`, {
+    const response = await fetch(`http://localhost:5000/users/${userId}`, {
       credentials: "include",
     });
     if (!response.ok) {

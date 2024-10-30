@@ -1,13 +1,13 @@
 // 'use client'
-import EditUserForm from "@/app/ui/forms/EditForm";
+import EditUserForm from "@/app/ui/forms/EditUserForm";
 import { fetchUserById } from "@/app/lib/data";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";
 import { notFound } from "next/navigation";
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const id = params.id;
-  const user = await fetchUserById(id);
+export default async function Page({ params }: { params: { userId: number } }) {
+  const userId = params.userId;
+  const user = await fetchUserById(userId);
   if (!user) {
     notFound();
   }
@@ -16,10 +16,10 @@ export default async function Page({ params }: { params: { id: string } }) {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: "Role Management", href: "/role-management" },
+          { label: "User Management", href: "/user/user-management" },
           {
             label: "Edit User",
-            href: `/role-management/${id}/edit`,
+            href: `/user/user-management/${userId}/edit`,
             active: true,
           },
         ]}

@@ -21,7 +21,7 @@ export default function DashboardLayout({ children }: Props) {
 
   return (
     <AppShell
-      header={{ height: 70 }}
+      header={{ height: 100 }}
       padding="md"
       transitionDuration={500}
       transitionTimingFunction="ease"
