@@ -1,3 +1,4 @@
+import notification from "../_components/notification";
 import { Backend_URL } from "./constant";
 
 export async function fetchUserById(userId: number) {
@@ -9,10 +10,41 @@ export async function fetchUserById(userId: number) {
       return null;
     }
     const user = await response.json();
-    // console.log("API Fetched By Id", user);
     return user;
   } catch (error) {
     console.error("Error fetching user:", error);
+    return null;
+  }
+}
+
+export async function fetchPharmacyById(id: number) {
+  try {
+    const response = await fetch(`http://localhost:5000/pharmacies/${id}`, {
+      credentials: "include",
+    });
+    if (!response.ok) {
+      return null;
+    }
+    const pharmacy = await response.json();
+    return pharmacy;
+  } catch (error: any) {
+    notification.error("Error fetching pharmacy:", error);
+    return null;
+  }
+}
+
+export async function fetchMedicationById(id: number) {
+  try {
+    const response = await fetch(`http://localhost:5000/medications/${id}`, {
+      credentials: "include",
+    });
+    if (!response.ok) {
+      return null;
+    }
+    const medication = await response.json();
+    return medication;
+  } catch (error: any) {
+    notification.error("Error fetching medication:", error);
     return null;
   }
 }

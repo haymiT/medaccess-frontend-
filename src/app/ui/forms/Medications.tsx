@@ -9,7 +9,6 @@ import {
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import notification from "../../_components/notification";
-import { Backend_URL } from "../../lib/constant";
 
 export default function MedicationsModal() {
   const [formData, setFormData] = useState({
@@ -27,6 +26,13 @@ export default function MedicationsModal() {
     });
   };
 
+  const handleCategoryChange = (category: string | null) => {
+    setFormData({
+      ...formData,
+      category: category || "",
+    });
+  }
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -39,7 +45,7 @@ export default function MedicationsModal() {
     };
 
     try {
-      const response = await fetch(`${Backend_URL}/drugs/register-drug`, {
+      const response = await fetch(`http://localhost:5000/medications/new`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,9 +57,9 @@ export default function MedicationsModal() {
       if (response.status === 201) {
         notification.success(
           "Success",
-          "You have successfully Registered the Drug"
+          "You have successfully Registered the Medication"
         );
-        router.push("/auth/signin");
+        router.push("/medications");
       } else {
         const errorData = await response.json();
         const errorMessage = Array.isArray(errorData.message)
@@ -69,7 +75,7 @@ export default function MedicationsModal() {
 
   return (
     <Container my={40}>
-      <Paper mt={10} shadow="md" p={'lg'}  radius="md">
+      <Paper mt={10} shadow="md" p={'lg'} radius="md">
         <TextInput
           required
           label="Name"
@@ -90,15 +96,26 @@ export default function MedicationsModal() {
           required
           label="Category"
           placeholder="Category"
-          // value={formData.category}
           data={[
-            { value: "antibiotics", label: "Antibiotics" },
-            { value: "analgesics", label: "Analgesics" },
-            { value: "antimalarial", label: "Antimalarial" },
-            { value: "antifungal", label: "Antifungal" },
-            { value: "antiviral", label: "Antiviral" },
+            { value: 'Gastrointestinal drugs', label: 'Gastrointestinal drugs' },
+            { value: 'Anti pain drugs', label: 'Anti pain drugs' },
+            { value: 'ENT Drugs', label: 'ENT Drugs' },
+            { value: 'Anti bacterial/antibiotics', label: 'Anti bacterial/antibiotics' },
+            { value: 'Anti Histamines and Anti allergies', label: 'Anti Histamines and Anti allergies' },
+            { value: 'Antihelminitics', label: 'Antihelminitics' },
+            { value: 'Hypoglycemic', label: 'Hypoglycemic' },
+            { value: 'CVS drugs', label: 'CVS drugs' },
+            { value: 'NSAID', label: 'NSAID' },
+            { value: 'Dermatological Agents', label: 'Dermatological Agents' },
+            { value: 'CNS drugs', label: 'CNS drugs' },
+            { value: 'Respiratory drugs', label: 'Respiratory drugs' },
+            { value: 'Hormonal Drugs', label: 'Hormonal Drugs' },
+            { value: 'Antiemetics and antiprotozoal drugs', label: 'Antiemetics and antiprotozoal drugs' },
+            { value: 'Ophthalmic products', label: 'Ophthalmic products' },
+            { value: 'Milk and cosmetics', label: 'Milk and cosmetics' },
+            { value: 'CBS drugs', label: 'CBS drugs' },
           ]}
-          onChange={handleInputChange}
+          onChange={handleCategoryChange}
           name="category"
         />
         <TextInput

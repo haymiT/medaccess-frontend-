@@ -1,14 +1,13 @@
-// 'use client'
-import EditUserForm from "@/app/ui/forms/EditUserForm";
-import { fetchUserById } from "@/app/lib/data";
+import { fetchMedicationById } from "@/app/lib/data";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";
 import { notFound } from "next/navigation";
+import EditMedicationForm from "@/app/ui/forms/edit/EditUserForm";
 
-export default async function Page({ params }: { params: { userId: number } }) {
-  const id = params.userId;
-  const user = await fetchUserById(id);
-  if (!user) {
+export default async function Page({ params }: { params: { id: number } }) {
+  const id = params.id;
+  const medication = await fetchMedicationById(id);
+  if (!medication) {
     notFound();
   }
 
@@ -25,7 +24,7 @@ export default async function Page({ params }: { params: { userId: number } }) {
         ]}
       />
       <Divider className="-mt-2" />
-      <EditUserForm user={user} />
+      <EditMedicationForm medication={medication} />
     </main>
   );
 }

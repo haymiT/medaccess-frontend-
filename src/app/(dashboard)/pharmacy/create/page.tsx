@@ -1,4 +1,4 @@
-import RegisterEmployeeForm from "@/app/ui/forms/create/RegisterEmployee";
+import RegisterPharmacyForm from "@/app/ui/forms/RegisterPharmacy";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";
 
@@ -7,17 +7,17 @@ export default async function Page() {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: "Register Employee", href: "/register-employee" },
+          { label: "Pharmacy", href: "/pharmacy" },
           {
-            label: "Add",
-            href: "/register-employee/create",
+            label: "Register Pharmacy",
+            href: "/pharmacy/create",
             active: true,
           },
         ]}
       />
         <Divider className="-mt-2" />
 
-      <RegisterEmployeeForm />
+      <RegisterPharmacyForm />
     </main>
   );
 }

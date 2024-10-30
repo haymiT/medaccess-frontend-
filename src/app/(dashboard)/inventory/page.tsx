@@ -19,7 +19,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { lusitana } from "@/app/ui/fonts";
 import { useRouter } from "next/navigation";
-import { User } from "../../lib/user";
+import { User } from "../../lib/models/user";
 import notification from "@/app/_components/notification";
 import { Backend_URL } from "@/app/lib/constant";
 

@@ -2,22 +2,21 @@
 import { useState } from "react";
 import {
   TextInput,
-  Select,
   Paper,
   Container,
   Button,
-  PasswordInput,
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import notification from "../../_components/notification";
 
-export default function CreateUserModal() {
+export default function RegisterPharmacyForm() {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    role: "",
-    password: "",
-    phone_number: ""
+    location: "",
+    phone_number: "",
+    established_year: "",
+    license_number: "",
+    owner_id: "",
   });
 
   const router = useRouter();
@@ -28,27 +27,21 @@ export default function CreateUserModal() {
     });
   };
 
-  const handleRoleChange = (role: string | null) => {
-    setFormData({
-      ...formData,
-      role: role || "",
-    });
-  };
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     // Prepare the final payload
     const payload = {
       name: formData.name,
-      email: formData.email,
-      password: formData.password,
+      location: formData.location,
       phone_number: formData.phone_number,
-      role: formData.role
+      established_year: formData.established_year,
+      license_number: formData.license_number,
+      owner_id: formData.owner_id,
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/users/new`, {
+      const response = await fetch(`http://localhost:5000/pharmacies/new`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,9 +53,9 @@ export default function CreateUserModal() {
       if (response.status === 201) {
         notification.success(
           "Success",
-          "You have successfully created an admin role"
+          "You have successfully Create Sales"
         );
-        router.push("/user/user-management");
+        router.push("/pharmacy"); 
       } else {
         const errorData = await response.json();
         const errorMessage = Array.isArray(errorData.message)
@@ -77,51 +70,60 @@ export default function CreateUserModal() {
   };
 
   return (
-    <Container size={500} my={40}>
-      <Paper mt={10} className="-ml-40" radius="md">
+    <Container my={40}>
+      <Paper mt={10} shadow="md" p='lg' radius="md">
+
         <TextInput
           label="Name"
-          placeholder="John Doe"
-          name="name"
+          placeholder="Enter pharmacy name"
+          value={formData.name}
           onChange={handleInputChange}
+          name="name"
           required
         />
         <TextInput
-          label="Email"
-          placeholder="you@rbac.tech"
-          name="email"
+          label="Location"
+          placeholder="Enter pharmacy location"
+          value={formData.location}
           onChange={handleInputChange}
+          name="location"
           required
-        />
-        <PasswordInput
-          label="Password"
-          placeholder="Your password"
-          name="password"
-          onChange={handleInputChange}
-          required
-          mt="md"
         />
         <TextInput
           label="Phone Number"
-          placeholder="1234567890"
-          name="phone_number"
+          placeholder="Enter pharmacy phone number"
+          value={formData.phone_number}
           onChange={handleInputChange}
+          name="phone_number"
           required
         />
-        <Select
-          label="Role"
-          placeholder="Select a role"
-          data={[
-            { value: "customer", label: "Customer" },
-            { value: "pharmacy", label: "Pharmacy" },
-            { value: "supplier", label: "Supplier" },
-          ]}
-          onChange={handleRoleChange}
+        <TextInput
+          label="Established Year"
+          placeholder="Enter pharmacy established year"
+          value={formData.established_year}
+          onChange={handleInputChange}
+          name="established_year"
           required
         />
-
+        <TextInput
+          label="License Number"
+          placeholder="Enter pharmacy license number"
+          value={formData.license_number}
+          onChange={handleInputChange}
+          name="license_number"
+          required
+        />
+        <TextInput
+          label="Owner ID"
+          placeholder="Enter pharmacy owner ID"
+          value={formData.owner_id}
+          onChange={handleInputChange}
+          name="owner_id"
+          required
+        />
+        <br />
         <Button fullWidth mt="xl" onClick={handleSubmit}>
-          Create User
+          Submit
         </Button>
       </Paper>
     </Container>

@@ -1,4 +1,4 @@
-import CreateSalesForm from "@/app/ui/forms/CreateSales";
+import CreateSalesForm from "@/app/ui/forms/create/CreateSales";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";
 

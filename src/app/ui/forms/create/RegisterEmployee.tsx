@@ -8,8 +8,8 @@ import {
   Select,
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import notification from "../../_components/notification";
-import { Backend_URL } from "../../lib/constant";
+import notification from "../../../_components/notification";
+import { Backend_URL } from "../../../lib/constant";
 
 export default function RegisterEmployeeForm() {
   const [formData, setFormData] = useState({

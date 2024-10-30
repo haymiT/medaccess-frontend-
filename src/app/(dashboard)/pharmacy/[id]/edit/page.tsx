@@ -1,14 +1,15 @@
 // 'use client'
 import EditUserForm from "@/app/ui/forms/edit/EditUserForm";
-import { fetchUserById } from "@/app/lib/data";
+import { fetchPharmacyById } from "@/app/lib/data";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";
 import { notFound } from "next/navigation";
+import EditPharmacyForm from "@/app/ui/forms/edit/EditUserForm";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: { id: number } }) {
   const id = params.id;
-  const user = await fetchUserById(id);
-  if (!user) {
+  const pharmacy = await fetchPharmacyById(id);
+  if (!pharmacy) {
     notFound();
   }
 
@@ -16,16 +17,16 @@ export default async function Page({ params }: { params: { id: string } }) {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: "Show Inventory", href: "/inventory" },
+          { label: "Pharmacy", href: "/pharmacy" },
           {
-            label: "Edit Inventory",
-            href: `/inventory/${id}/edit`,
+            label: "Edit Pharmacy",
+            href: `/pharmacy/${id}/edit`,
             active: true,
           },
         ]}
       />
       <Divider className="-mt-2" />
-      <EditUserForm user={user} />
+      <EditPharmacyForm pharmacy={pharmacy}/>
     </main>
   );
 }

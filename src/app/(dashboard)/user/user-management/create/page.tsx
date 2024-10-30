@@ -1,4 +1,4 @@
-import CreateUserModal from "@/app/ui/forms/CreateUser";
+import CreateUserModal from "@/app/ui/forms/create/CreateUser";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";
 

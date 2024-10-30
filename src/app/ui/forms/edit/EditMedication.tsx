@@ -4,30 +4,23 @@ import { useRouter } from "next/navigation";
 import {
   Button,
   TextInput,
-  Select,
   Paper,
   Container,
   Flex,
 } from "@mantine/core";
-import { IconUser, IconMail, IconPhone } from "@tabler/icons-react";
-import notification from "../../_components/notification";
-import { Backend_URL } from "../../lib/constant";
-import { User } from "@/app/lib/user";
+import { IconUser, IconPhone } from "@tabler/icons-react";
+import notification from "../../../_components/notification";
+import { Pharmacy } from "@/app/lib/models/pharmacy";
 
-export default function EditUserForm({ user }: { user: User }) {
+export default function EditPharmacyForm({ pharmacy }: { pharmacy: Pharmacy }) {
   const [formData, setFormData] = useState({
-    name: user?.name || "",
-    email: user?.email || "",
-    phone_number: user?.phone_number || "",
-    role: user?.role || "",
-    // address: {
-    //   city: user?.address?.city || "",
-    //   street: user?.address?.street || "",
-    //   country: user?.address?.country || "",
-    // },
+    name: pharmacy?.name || "",
+    location: pharmacy?.location || "",
+    phone_number: pharmacy?.phone_number || "",
+    established_year: pharmacy?.established_year || "",
+    license_number: pharmacy?.license_number || "",
+    owner_id: pharmacy?.owner_id || "",
   });
-
-  console.log("Form Data", formData);
 
   const router = useRouter();
 
@@ -37,14 +30,10 @@ export default function EditUserForm({ user }: { user: User }) {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleSelectChange = (value: string | null) => {
-    setFormData((prevState: any) => ({ ...prevState, role: value }));
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/users/${user.userId}/edit`, {
+      const response = await fetch(`http://localhost:5000/pharmacies/${pharmacy.id}/edit`, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -59,11 +48,11 @@ export default function EditUserForm({ user }: { user: User }) {
 
         notification.error("Error", errorMessage);
       } else {
-        notification.success("Success", "User updated successfully");
-        router.push("/user/user-management");
+        notification.success("Success", "Pharmacy updated successfully");
+        router.push("/pharmacy");
       }
     } catch (error) {
-      console.error("Error updating user:", error);
+      console.error("Error updating pharmacy:", error);
     }
   };
 
@@ -79,12 +68,13 @@ export default function EditUserForm({ user }: { user: User }) {
           onChange={handleChange}
           required
         />
+
         <TextInput
-          label="Email"
-          placeholder="User's email"
-          leftSection={<IconMail size={16} />}
-          name="email"
-          value={formData.email}
+          label="Location"
+          placeholder="User's location"
+          leftSection={<IconUser size={16} />}
+          name="location"
+          value={formData.location}
           onChange={handleChange}
           required
         />
@@ -97,48 +87,38 @@ export default function EditUserForm({ user }: { user: User }) {
           onChange={handleChange}
           required
         />
+        <TextInput
+          label="Established Year"
+          placeholder="User's established year"
+          leftSection={<IconUser size={16} />}
+          name="established_year"
+          value={formData.established_year}
+          onChange={handleChange}
+          required
 
-        <Select
-          label="Role"
-          placeholder="Select a role"
-          // data={['customer', 'pharmacy', 'supplier']}
-          data={[
-            { value: "customer", label: "Customer" },
-            { value: "pharmacy", label: "Pharmacy" },
-            { value: "supplier", label: "Supplier" },
-          ]}
-          value={formData.role}
-          onChange={handleSelectChange}
-          required
         />
-        {/* <TextInput
-          label="City"
-          placeholder="City"
-          name="city"
-          value={formData?.address?.city}
+        <TextInput
+          label="License Number"
+          placeholder="User's license number"
+          leftSection={<IconUser size={16} />}
+          name="license_number"
+          value={formData.license_number}
           onChange={handleChange}
           required
         />
         <TextInput
-          label="Street"
-          placeholder="Street"
-          name="street"
-          value={formData?.address?.street}
+          label="Owner ID"
+          placeholder="User's owner ID"
+          leftSection={<IconUser size={16} />}
+          name="owner_id"
+          value={formData.owner_id}
           onChange={handleChange}
           required
         />
-        <TextInput
-          label="Country"
-          placeholder="Country"
-          name="country"
-          value={formData?.address?.country}
-          onChange={handleChange}
-          required
-        /> */}
 
         <Flex direction={"row"} gap={5}>
           <Button type="submit" color="blue" mt={10} onClick={handleSubmit}>
-            Update User
+            Update
           </Button>
 
           <Button
@@ -147,7 +127,7 @@ export default function EditUserForm({ user }: { user: User }) {
             variant="outline"
             mt={10}
             component="a"
-            href="/user/user-management"
+            href="/pharmacy"
           >
             Cancel
           </Button>

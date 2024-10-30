@@ -1,5 +1,5 @@
 // 'use client'
-import EditUserForm from "@/app/ui/forms/EditUserForm";
+import EditUserForm from "@/app/ui/forms/edit/EditUserForm";
 import { fetchUserById } from "@/app/lib/data";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";

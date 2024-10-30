@@ -1,6 +1,6 @@
 import { Group, Button, Divider, Box, Burger, Drawer, ScrollArea, rem } from '@mantine/core';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 import { Logo } from '../logo/logo';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './header-search.module.css';
@@ -10,6 +10,7 @@ const Links = ({ active, setActive }: any) => {
     const links = [
         { href: '/dashboard', label: 'Dashboard' },
         { href: '/medications', label: 'Medications' },
+        { href: '/pharmacy', label: 'Pharmacies' },
         { href: '/sell-drug', label: 'Sell Drug' },
         { href: '/show-sold-drug', label: 'Show Sold Drug' },
         { href: '/inventory', label: 'Inventory' },
