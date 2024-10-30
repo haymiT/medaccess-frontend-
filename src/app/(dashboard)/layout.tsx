@@ -2,15 +2,10 @@
 
 import {
   AppShell,
-  Burger,
-  Text,
   useMantineColorScheme,
   useMantineTheme,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { Navbar } from "../_components/navbar/navbar";
-import { navLinks } from "../config";
-import { AdminHeader } from "../_components/header/admin-header";
+import { HeaderMegaMenu } from "../_components/header/header-search";
 
 
 interface Props {
@@ -18,7 +13,6 @@ interface Props {
 }
 
 export default function DashboardLayout({ children }: Props) {
-  const [opened, { toggle }] = useDisclosure();
   const { colorScheme } = useMantineColorScheme();
   const theme = useMantineTheme();
 
@@ -27,34 +21,15 @@ export default function DashboardLayout({ children }: Props) {
 
   return (
     <AppShell
-      header={{ height: 60 }}
-      navbar={{ width: 280, breakpoint: "sm", collapsed: { mobile: !opened } }}
-      padding="5px"
+      header={{ height: 70 }}
+      padding="md"
       transitionDuration={500}
       transitionTimingFunction="ease"
     >
-      <AppShell.Navbar>
-        <Navbar data={navLinks} hidden={!opened} />
-      </AppShell.Navbar>
       <AppShell.Header>
-        <AdminHeader
-          burger={
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              hiddenFrom="sm"
-              size="sm"
-              mr="xl"
-            />
-          }
-        />
+        <HeaderMegaMenu />
       </AppShell.Header>
       <AppShell.Main bg={bg}>{children}</AppShell.Main>
-      {/* <AppShell.Footer>
-        <Text w="full" size="sm" c="gray">
-          CopyRight © {new Date().getFullYear()} FineInvoice. All rights reserved.
-        </Text>
-      </AppShell.Footer> */}
     </AppShell>
   );
 }

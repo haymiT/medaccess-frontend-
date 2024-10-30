@@ -1,6 +1,5 @@
 import { Flex, Text } from "@mantine/core";
 import Link from "next/link";
-import classes from "./Logo.module.css";
 
 interface Props {
   width?: string;
@@ -13,11 +12,10 @@ export const Logo: React.FC<Props> = () => {
       <Link
         href="/"
         style={{ textDecoration: "none" }}
-        className={classes.heading}
       >
         <Text fw="bolder" size="xl">
           Med
-          <Text component="span" fw="normal" className={classes.subheading}>
+          <Text component="span" fw="normal">
             Access
           </Text>
         </Text>
