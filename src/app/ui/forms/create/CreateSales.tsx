@@ -7,8 +7,7 @@ import {
   Button,
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import notification from "../../_components/notification";
-import { Backend_URL } from "../../lib/constant";
+import notification from "@/app/_components/notification";
 
 export default function CreateSalesForm() {
   const [formData, setFormData] = useState({
@@ -38,7 +37,7 @@ export default function CreateSalesForm() {
     };
 
     try {
-      const response = await fetch(`${Backend_URL}/drugs/register-drug`, {
+      const response = await fetch(`http://localhost:5000/drugs/register-drug`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

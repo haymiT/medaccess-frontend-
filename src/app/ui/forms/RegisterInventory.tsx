@@ -12,7 +12,7 @@ import { Backend_URL } from "../../lib/constant";
 
 export default function RegisterInventoryForm() {
   const [formData, setFormData] = useState({
-    name: "",
+    // name: "",
     pharmacyId: "",
     medicationId: "",
     quantity: "",
@@ -40,11 +40,11 @@ export default function RegisterInventoryForm() {
 
     // Prepare the final payload
     const payload = {
-      name: formData.name,
-      pharmacyId: formData.pharmacyId,
-      medicationId: formData.medicationId,
+      // name: formData.name,
+      pharmacy_id: formData.pharmacyId, // change to snake_case
+      medication_id: formData.medicationId, // change to snake_case
       quantity: formData.quantity,
-      unitPrice: formData.unitPrice,
+      unit_price: formData.unitPrice, // change to snake_case
       manufacturer: formData.manufacturer,
       manufacturing_date: formData.manufacturing_date,
       expiration_date: formData.expiration_date,
@@ -55,8 +55,9 @@ export default function RegisterInventoryForm() {
       dosage_value: formData.dosage_value,
     };
 
+
     try {
-      const response = await fetch(`${Backend_URL}/drugs/register-drug`, {
+      const response = await fetch(`http://localhost:5000/inventory/new`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +71,7 @@ export default function RegisterInventoryForm() {
           "Success",
           "You have successfully Create Sales"
         );
-        router.push("/auth/signin");
+        router.push("/inventory");
       } else {
         const errorData = await response.json();
         const errorMessage = Array.isArray(errorData.message)
@@ -88,14 +89,14 @@ export default function RegisterInventoryForm() {
     <Container my={40}>
       <Paper mt={10} shadow="md" p='lg' radius="md">
 
-        <TextInput
+        {/* <TextInput
           label="Name"
           placeholder="Name"
           value={formData.name}
           onChange={handleInputChange}
           name="name"
           required
-        />
+        /> */}
         <TextInput
           label="Pharmacy Id"
           placeholder="Pharmacy Id"
@@ -138,6 +139,7 @@ export default function RegisterInventoryForm() {
         />
         <TextInput
           label="Manufacturing Date"
+          type="date"
           placeholder="Manufacturing Date"
           value={formData.manufacturing_date}
           onChange={handleInputChange}
@@ -146,6 +148,7 @@ export default function RegisterInventoryForm() {
         />
         <TextInput
           label="Expiration Date"
+          type="date"
           placeholder="Expiration Date"
           value={formData.expiration_date}
           onChange={handleInputChange}
@@ -186,6 +189,7 @@ export default function RegisterInventoryForm() {
         />
         <TextInput
           label="Dosage Value"
+          type="number"
           placeholder="Dosage Value"
           value={formData.dosage_value}
           onChange={handleInputChange}

@@ -49,6 +49,21 @@ export async function fetchMedicationById(id: number) {
   }
 }
 
+export async function fetchInventoryById(id: number) {
+  try {
+    const response = await fetch(`http://localhost:5000/inventory/${id}`, {
+      credentials: "include",
+    });
+    if (!response.ok) {
+      return null;
+    }
+    const inventory = await response.json();
+    return inventory;
+  } catch (error: any) {
+    notification.error("Error fetching inventory:", error);
+    return null;
+  }
+}
 
 export async function fetchUsers() {
   try {

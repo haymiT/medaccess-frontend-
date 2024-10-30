@@ -1,14 +1,17 @@
-// 'use client'
-import EditUserForm from "@/app/ui/forms/edit/EditUserForm";
-import { fetchUserById } from "@/app/lib/data";
+import { fetchInventoryById, fetchUserById } from "@/app/lib/data";
 import Breadcrumbs from "@/app/ui/breadcrumbs";
 import { Divider } from "@nextui-org/react";
 import { notFound } from "next/navigation";
+import EditInventoryForm from "@/app/ui/forms/edit/EditInventory";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: { id: number } }) {
   const id = params.id;
-  const user = await fetchUserById(id);
-  if (!user) {
+  const inventoryData = await fetchInventoryById(id);
+
+  // Extract the first inventory item
+  const inventory = inventoryData && Array.isArray(inventoryData) ? inventoryData[0] : null;
+
+  if (!inventory) {
     notFound();
   }
 
@@ -25,7 +28,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         ]}
       />
       <Divider className="-mt-2" />
-      <EditUserForm user={user} />
+      <EditInventoryForm inventory={inventory} />
     </main>
   );
 }

@@ -19,44 +19,42 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { lusitana } from "@/app/ui/fonts";
 import { useRouter } from "next/navigation";
-import { User } from "../../lib/models/user";
 import notification from "@/app/_components/notification";
-import { Backend_URL } from "@/app/lib/constant";
+import { Inventory } from "@/app/lib/models/inventory";
 
 export default function UserListTable() {
-  const [users, setUsers] = useState([]);
+  const [inventory, setInventory] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchInventory = async () => {
       try {
-        const response = await fetch(`${Backend_URL}/users/`);
+        const response = await fetch(`http://localhost:5000/inventory`);
         const data = await response.json();
-        console.log("Users Data", data);
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
+        setInventory(data);
+      } catch (error: any) {
+        notification.error("Error fetching inventory:", error);
       }
     };
 
-    fetchUsers();
+    fetchInventory();
   }, []);
 
-  const handleDelete = async (userId: number) => {
+  const handleDelete = async (id: number) => {
     try {
-      const response = await fetch(`${Backend_URL}/users/${userId}`, {
-        method: "DELETE",
+      const response = await fetch(`http://localhost:5000/inventory/${id}/delete`, {
+        method: "POST",
         credentials: "include",
       });
 
       if (response.ok) {
-        setUsers((prevUsers) =>
-          prevUsers.filter((user: User) => user?.id !== userId)
+        setInventory((prevInv) =>
+          prevInv.filter((inv: Inventory) => inv?.inventory_id !== id)
         );
         closeModal("delete");
         notification.success(
           "Success",
-          `User with ID ${userId} has been deleted`
+          `Inventory with ID ${id} has been deleted`
         );
       } else {
         const errorData = await response.json();
@@ -67,29 +65,29 @@ export default function UserListTable() {
         notification.error("Error", errorMessage);
       }
     } catch (error) {
-      notification.error("Error", "There was an issue deleting the user");
+      notification.error("Error", "There was an issue deleting the inventory");
     }
   };
 
   const showModal = ({
-    user,
+    inventory,
     action,
   }: {
-    user: User;
+    inventory: Inventory;
     action: "delete" | "view" | "edit";
   }) => {
     if (action === "delete") {
       modals.openConfirmModal({
-        title: `Are you sure you want to delete "${user.name}?"`,
+        // title: `Are you sure you want to delete "${inventory.name}?"`,
         children: (
           <Text size="sm">
-            This action is irreversible. The user with ID {user.id} will be
+            This action is irreversible. The inventory with ID {inventory.inventory_id} will be
             permanently deleted.
           </Text>
         ),
         labels: { confirm: "Delete", cancel: "Cancel" },
         confirmProps: { color: "red" },
-        onConfirm: () => handleDelete(user.id),
+        onConfirm: () => handleDelete(inventory.inventory_id),
       });
     } else {
       openModal({
@@ -111,9 +109,9 @@ export default function UserListTable() {
             </Text>
             <Grid gutter="xs">
               <GridCol span={2}>ID</GridCol>
-              <GridCol span={10}>{user.id}</GridCol>
-              <GridCol span={2}>Name</GridCol>
-              <GridCol span={10}>{user.name}</GridCol>
+              <GridCol span={10}>{inventory.inventory_id}</GridCol>
+              {/* <GridCol span={2}>Name</GridCol> */}
+              {/* <GridCol span={10}>{inventory.name}</GridCol> */}
             </Grid>
             <Button onClick={() => closeModal(action)}>Close</Button>
           </Stack>
@@ -149,31 +147,32 @@ export default function UserListTable() {
             // { accessor: "inventoryId", title: "Inventory Id", textAlign: "left" },
             // { accessor: "pharmacyId", title: "Pharmacy Id", textAlign: "left" },
             // { accessor: "medicationId", title: "Medication Id", textAlign: "left" },
-            { accessor: "name", title: "Name", textAlign: "left" },
+            // { accessor: "name", title: "Name", textAlign: "left" },
             { accessor: "quantity", title: "Quantity", textAlign: "left" },
-            { accessor: "unitPrice", title: "Unit Price", textAlign: "left" },
+            { accessor: "unit_price", title: "Unit Price", textAlign: "left" },
             { accessor: "manufacturer", title: "Manufacturer", textAlign: "left" },
-            { accessor: "manufacturingDate", title: "Manufacturing Date", textAlign: "left" },
-            { accessor: "expirationDate", title: "Expiration Date", textAlign: "left" },
-            { accessor: "shelfNumber", title: "Shelf Number", textAlign: "left" },
+            { accessor: "manufacturing_date", title: "Manufacturing Date", textAlign: "left" },
+            { accessor: "expiration_date", title: "Expiration Date", textAlign: "left" },
+            { accessor: "shelf_number", title: "Shelf Number", textAlign: "left" },
             // { accessor: "createdAt", title: "Created At", textAlign: "left" },
             // { accessor: "updatedAt", title: "Updated At", textAlign: "left" },
-            { accessor: "binCard", title: "Bin Card", textAlign: "left" },
-            { accessor: "scoreCard", title: "Score Card", textAlign: "left" },
-            { accessor: "dosageUnit", title: "Dosage Unit", textAlign: "left" },
+            { accessor: "bin_card", title: "Bin Card", textAlign: "left" },
+            { accessor: "score_card", title: "Score Card", textAlign: "left" },
+            { accessor: "dosage_unit", title: "Dosage Unit", textAlign: "left" },
+            { accessor: "dosage_value", title: "Dosage Value", textAlign: "left" },
             {
               accessor: "actions",
               title: <Box mr={6}>Actions</Box>,
               width: "0%",
               textAlign: "right",
-              render: (user: any) => (
+              render: (inventory: Inventory) => (
                 <Group gap={4} wrap="nowrap">
                   <Tooltip label="View" position="top" withArrow>
                     <ActionIcon
                       size="sm"
                       variant="subtle"
                       color="green"
-                      onClick={() => showModal({ user, action: "view" })}
+                      onClick={() => showModal({ inventory, action: "view" })}
                     >
                       <IconEye size={16} />
                     </ActionIcon>
@@ -184,7 +183,7 @@ export default function UserListTable() {
                       variant="subtle"
                       color="blue"
                       onClick={() =>
-                        router.push(`/role-management/${user.id}/edit`)
+                        router.push(`/inventory/${inventory.inventory_id}/edit`)
                       }
                     >
                       <IconEdit size={16} />
@@ -195,7 +194,7 @@ export default function UserListTable() {
                       size="sm"
                       variant="subtle"
                       color="red"
-                      onClick={() => showModal({ user, action: "delete" })}
+                      onClick={() => showModal({ inventory, action: "delete" })}
                     >
                       <IconTrash size={16} />
                     </ActionIcon>
@@ -204,7 +203,7 @@ export default function UserListTable() {
               ),
             },
           ]}
-          records={users}
+          records={inventory}
           rowClassName="hover:bg-gray-50"
           className="border border-gray-200 rounded-lg"
         />
