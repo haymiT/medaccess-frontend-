@@ -69,6 +69,11 @@ export default function CreateSalesForm() {
   return (
     <Container size={500} my={40}>
       <Paper mt={10} className="-ml-40" radius="md">
+        {/* id = db.Column(db.Integer, primary_key=True)  # Unique identifier for the sale
+    pharmacy_id = db.Column(db.Integer, db.ForeignKey('pharmacies.id'), nullable=False)  # Foreign key to Pharmacy
+    user_id = db.Column(db.Integer, db.ForeignKey('users.userId'), nullable=False)  # Foreign key to User (seller)
+    total_price = db.Column(db.Numeric(10, 2), nullable=False)  # Total price for the sale
+    sale_date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)  # Date of the sale */}
         <TextInput
           required
           label="Inventory ID"

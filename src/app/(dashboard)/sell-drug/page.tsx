@@ -147,15 +147,10 @@ export default function UserListTable() {
             withColumnBorders
             columns={[
               { accessor: "name", title: "Name", textAlign: "left" },
-              { accessor: "quantity", title: "Quantity", textAlign: "left" },
-              { accessor: "unit_price", title: "Unit Price", textAlign: "left" },
-              { accessor: "subtotal", title: "Sub Total", textAlign: "left" },
-              // id = db.Column(db.Integer, primary_key=True)
-              // sell_id = db.Column(db.Integer, db.ForeignKey('sells.id'), nullable=False)  # Foreign key to Sell
-              // inventory_id = db.Column(db.Integer, db.ForeignKey('inventory.inventory_id'), nullable=False)  # Foreign key to Inventory
-              // quantity = db.Column(db.Integer, nullable=False)  # Quantity sold
-              // unit_price = db.Column(db.Numeric(10, 2), nullable=False)  # Unit price at sale time
-              // subtotal = db.Column(db.Numeric(10, 2), nullable=False)  # Subtotal for this item (quantity * unit_price)
+              { accessor: "pharmacy_id", title: "Pharmacy Id", textAlign: 'left' },
+              { accessor: "user_id", title: "user_id Id", textAlign: 'left' },
+              { accessor: "total_price", title: "Total Price", textAlign: 'left' },
+              { accessor: "sale_date", title: "Sale Date", textAlign: 'left' },
               {
                 accessor: "actions",
                 title: <Box mr={6}>Actions</Box>,
