@@ -12,11 +12,19 @@ import { Backend_URL } from "../../lib/constant";
 
 export default function RegisterInventoryForm() {
   const [formData, setFormData] = useState({
-    inventoryId: "",
+    name: "",
+    pharmacyId: "",
     medicationId: "",
     quantity: "",
-    location: "",
-    expiryDate: "",
+    unitPrice: "",
+    manufacturer: "",
+    manufacturing_date: "",
+    expiration_date: "",
+    shelf_number: "",
+    bin_card: "",
+    score_card: "",
+    dosage_unit: "",
+    dosage_value: "",
   });
 
   const router = useRouter();
@@ -32,11 +40,19 @@ export default function RegisterInventoryForm() {
 
     // Prepare the final payload
     const payload = {
-      inventoryId: formData.inventoryId,
+      name: formData.name,
+      pharmacyId: formData.pharmacyId,
       medicationId: formData.medicationId,
       quantity: formData.quantity,
-      location: formData.location,
-      expiryDate: formData.expiryDate,
+      unitPrice: formData.unitPrice,
+      manufacturer: formData.manufacturer,
+      manufacturing_date: formData.manufacturing_date,
+      expiration_date: formData.expiration_date,
+      shelf_number: formData.shelf_number,
+      bin_card: formData.bin_card,
+      score_card: formData.score_card,
+      dosage_unit: formData.dosage_unit,
+      dosage_value: formData.dosage_value,
     };
 
     try {
@@ -69,50 +85,114 @@ export default function RegisterInventoryForm() {
   };
 
   return (
-    <Container size={500} my={40}>
-      <Paper mt={10} className="-ml-40" radius="md">
+    <Container my={40}>
+      <Paper mt={10} shadow="md" p='lg' radius="md">
+
         <TextInput
-          required
-          label="Inventory ID"
-          placeholder="Enter Inventory ID"
-          value={formData.inventoryId}
+          label="Name"
+          placeholder="Name"
+          value={formData.name}
           onChange={handleInputChange}
-          name="inventoryId"
+          name="name"
+          required
         />
         <TextInput
+          label="Pharmacy Id"
+          placeholder="Pharmacy Id"
+          value={formData.pharmacyId}
+          onChange={handleInputChange}
+          name="pharmacyId"
           required
-          label="Medication ID"
-          placeholder="Enter Medication ID"
+        />
+        <TextInput
+          label="Medication Id"
+          placeholder="Medication Id"
           value={formData.medicationId}
           onChange={handleInputChange}
           name="medicationId"
+          required
         />
         <TextInput
-          required
           label="Quantity"
-          type="number"
-          placeholder="Enter Quantity"
+          placeholder="Quantity"
           value={formData.quantity}
           onChange={handleInputChange}
           name="quantity"
+          required
         />
         <TextInput
-          required
-          label="Location"
-          placeholder="Enter Location"
-          value={formData.location}
+          label="Unit Price"
+          placeholder="Unit Price"
+          value={formData.unitPrice}
           onChange={handleInputChange}
-          name="location"
+          name="unitPrice"
+          required
         />
         <TextInput
-          required
-          label="Expiry Date"
-          type="date"
-          placeholder="Enter Expiry Date"
-          value={formData.expiryDate}
+          label="Manufacturer"
+          placeholder="Manufacturer"
+          value={formData.manufacturer}
           onChange={handleInputChange}
-          name="expiryDate"
+          name="manufacturer"
+          required
         />
+        <TextInput
+          label="Manufacturing Date"
+          placeholder="Manufacturing Date"
+          value={formData.manufacturing_date}
+          onChange={handleInputChange}
+          name="manufacturing_date"
+          required
+        />
+        <TextInput
+          label="Expiration Date"
+          placeholder="Expiration Date"
+          value={formData.expiration_date}
+          onChange={handleInputChange}
+          name="expiration_date"
+          required
+        />
+        <TextInput
+          label="Shelf Number"
+          placeholder="Shelf Number"
+          value={formData.shelf_number}
+          onChange={handleInputChange}
+          name="shelf_number"
+          required
+        />
+        <TextInput
+          label="Bin Card"
+          placeholder="Bin Card"
+          value={formData.bin_card}
+          onChange={handleInputChange}
+          name="bin_card"
+          required
+        />
+        <TextInput
+          label="Score Card"
+          placeholder="Score Card"
+          value={formData.score_card}
+          onChange={handleInputChange}
+          name="score_card"
+          required
+        />
+        <TextInput
+          label="Dosage Unit"
+          placeholder="Dosage Unit"
+          value={formData.dosage_unit}
+          onChange={handleInputChange}
+          name="dosage_unit"
+          required
+        />
+        <TextInput
+          label="Dosage Value"
+          placeholder="Dosage Value"
+          value={formData.dosage_value}
+          onChange={handleInputChange}
+          name="dosage_value"
+          required
+        />
+        <br />
         <Button fullWidth mt="xl" onClick={handleSubmit}>
           Submit
         </Button>
